@@ -1,0 +1,28 @@
+﻿<h1>Coding Events</h1>
+
+<p>
+    <a asp-controller="Events" asp-action="Add">Add Event</a>
+    <a asp-controller="Events" asp-action="Edit">Edit Event</a>
+</p>
+
+@if (ViewBag.events.Count == 0)
+{
+    <p>No events yet!</p>
+}
+
+<table>
+    @foreach (Event kvp in ViewBag.events)
+    {
+    <tr>
+        <th>ID</th>
+        <th>Event Name</th>
+        <th>Event Description</th>
+    </tr>
+        <tr>
+            <td>@kvp.Id</td>
+            <td>@kvp.Name</td>
+            <td>@kvp.Description</td>
+        </tr>
+    }
+
+</table>
