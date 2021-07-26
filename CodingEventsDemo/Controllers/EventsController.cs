@@ -56,6 +56,12 @@ namespace coding_events_practice.Controllers
             EventData.SubmitEditEvent(eventId, name, description);
             return Redirect("/Events");
         }
+
+        public IActionResult EventInfo()
+        {
+            ViewBag.events = EventData.GetAll();
+            return View();
+        }
     }
 
 
