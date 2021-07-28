@@ -7,9 +7,25 @@
 {
     ViewBag.eventname = item.Name;
     ViewBag.desc = item.Description;
+    ViewBag.location = item.Location;
+    ViewBag.attendees = item.Attendees;
 }
-
+<div>
 <h1>@ViewBag.eventname</h1>
 <p>@ViewBag.desc</p>
+
+</div>
+
+<div>
+<h2>Location</h2>
+<p>@ViewBag.location</p>
+
+</div>
+
+<div>
+<h2>Number of attendees</h2>
+<p>@ViewBag.attendees</p>
+
+</div>
 
 <a href="/Events/Index">Return to list</a>

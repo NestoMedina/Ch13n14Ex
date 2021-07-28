@@ -1,27 +1,33 @@
-﻿<h1>Coding Events</h1>
+﻿
+@model List<Event>
+<h1>Coding Events</h1>
 
 <p>
     <a asp-controller="Events" asp-action="Add">Add Event</a>
     <a asp-controller="Events" asp-action="Edit">Edit Event</a>
 </p>
 
-@if (ViewBag.events.Count == 0)
+@if (Model.Count == 0)
 {
     <p>No events yet!</p>
 }
 
 <table>
-    @foreach (Event kvp in ViewBag.events)
+    @foreach (Event kvp in Model)
     {
     <tr>
         <th>ID</th>
         <th>Event Name</th>
         <th>Event Description</th>
+        <th>Event Location</th>
+        <th>Number of Attendees</th>
     </tr>
         <tr>
             <td>@kvp.Id</td>
             <td><a href="/Events/EventInfo">@kvp.Name</a></td>
             <td>@kvp.Description</td>
+            <td>@kvp.Location</td>
+            <td>@kvp.Attendees</td>
         </tr>
     }
 

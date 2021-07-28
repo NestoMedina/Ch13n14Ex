@@ -22,7 +22,7 @@ namespace CodingEventsDemo.Data
             return _events.Values;
         }
 
-        public static void SubmitEditEvent(int eventId, string name, string description)
+        public static void SubmitEditEvent(int eventId, string name, string description, string location, int attendees)
         {
             foreach (KeyValuePair<int, Event> org in _events)
             {
@@ -30,6 +30,8 @@ namespace CodingEventsDemo.Data
                 {
                     org.Value.Name = name;
                     org.Value.Description = description;
+                    org.Value.Location = location;
+                    org.Value.Attendees = attendees;
                     break;
                 }
             }
