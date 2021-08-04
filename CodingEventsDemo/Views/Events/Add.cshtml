@@ -33,6 +33,11 @@
 
         </div>
 
+        <div>
+        <label asp-for="Type">Event Type</label>
+        <select asp-for="Type" asp-items="Model.EventTypes"></select>
+        </div>
+
 
 
     <input type="submit" value="Add Event" />

@@ -7,19 +7,17 @@ namespace CodingEventsDemo.Models
 {
     public class Event
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
         public int Attendees { get; set; }
-        public int Id { get; }
-        private static int nextId = 1;
+        public EventType Type { get; set; }
 
         public Event ()
         {
-            this.Id = nextId;
-            nextId++;
         }
-        public Event(string name, string description, string location, int attendees) : this ()
+        public Event(string name, string description, string location, int attendees)
         {
             this.Name = name;
             this.Description = description;

@@ -13,15 +13,20 @@ namespace coding_events_practice.Controllers
 {
     public class EventsController : Controller
     {
+        private EventDbContext _context;
+        public EventsController(EventDbContext dbContext)
+        {
+            _context = dbContext;
+        }
         // GET: /<controller>/
         //static private List<string> Events = new List<string>();
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<Event> newList = new List<Event>(EventData.GetAll());
+            List<Event> events = _context.Events.ToList();
 
-            return View(newList);
+            return View(events);
         }
 
         [HttpGet]
@@ -40,28 +45,22 @@ namespace coding_events_practice.Controllers
                 { Name = newEvent.Name,
                     Description = newEvent.Description,
                     Location = newEvent.Location,
-                    Attendees = newEvent.Attendees
+                    Attendees = newEvent.Attendees,
+                    Type = newEvent.Type
                 };
 
 
-                EventData.Add(newInputEvent);
+                _context.Events.Add(newInputEvent);
+                _context.SaveChanges();
                 return Redirect("/Events");
             }
                 return View(newEvent);
         } 
 
- /*       [HttpPost]
-        public IActionResult NewEvent(string name, string desc)
-        {
-            Event newEvent = new Event(name, desc);
-            EventData.Add(newEvent);
-
-            return Redirect("/Events");
-        } */
-
         public IActionResult Edit()
         {
-            ViewBag.events = EventData.GetAll();
+            List<Event> events = _context.Events.ToList();
+            ViewBag.events = events;
             return View();
         }
 
@@ -74,14 +73,46 @@ namespace coding_events_practice.Controllers
         [HttpPost("/Events/EditEvent")]
         public IActionResult SubmittedEditEventForm(int eventId, string name, string description, string location, int attendees)
         {
-            EventData.SubmitEditEvent(eventId, name, description, location, attendees);
+           // EventData.SubmitEditEvent(eventId, name, description, location, attendees);
+            List<Event> events = _context.Events.ToList();
+            foreach (Event item in events)
+            {
+                if (eventId == item.Id)
+                {
+                    item.Name = name;
+                    item.Description = description;
+                    item.Location = location;
+                    item.Attendees = attendees;
+                }
+            }
+            _context.SaveChanges();
+
             return Redirect("/Events");
         }
 
         public IActionResult EventInfo()
         {
-            ViewBag.events = EventData.GetAll();
+            List<Event> events = _context.Events.ToList();
+            ViewBag.events = events;
             return View();
+        }
+
+        public IActionResult Delete()
+        {
+            ViewBag.events = _context.Events.ToList();
+            return View();
+        }
+        
+        [HttpPost("/Events/Delete")]
+        public IActionResult Delete(int[] eventIds)
+        {
+            foreach(int eventId in eventIds)
+            {
+                Event theEvent = _context.Events.Find(eventId);
+                _context.Events.Remove(theEvent);
+            }
+            _context.SaveChanges();
+            return Redirect("/Events");
         }
     }
 

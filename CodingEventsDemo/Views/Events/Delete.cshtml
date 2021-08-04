@@ -1,0 +1,19 @@
+﻿
+<h1>Edit Event</h1>
+
+<form method="post">
+
+    <label>Which event would you like to delete?</label>
+    <div>
+        @foreach (Event kvp in ViewBag.events)
+        {
+            <div>
+                <label for="eventIds">@kvp.Id : @kvp.Name</label>
+                <input type="checkbox" name="eventIds" value="@kvp.Id" />
+
+            </div>
+        }
+    </div>
+
+    <input type="submit" value="Delete" />
+</form>
