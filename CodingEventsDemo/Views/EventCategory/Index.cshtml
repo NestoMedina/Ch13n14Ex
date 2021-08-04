@@ -1,7 +1,9 @@
 ﻿@model List<EventCategory>
 
 <h1>Event Categories</h1>
-
+<p>
+    <a asp-controller="EventCategory" asp-action="Create">Add Category</a>
+</p>
 @if (Model.Count == 0)
 {
     <p>No event categories yet!</p>
@@ -12,11 +14,11 @@
     {
         <tr>
             <th>ID</th>
-            <th>Event Name</th>
+            <th>Category Name</th>
         </tr>
         <tr>
             <td>@kvp.Id</td>
-            <td><a href="/Events/EventInfo">@kvp.Name</a></td>
+            <td><a href="/EventCategory/EventInfo">@kvp.Name</a></td>
         </tr>
     }
 

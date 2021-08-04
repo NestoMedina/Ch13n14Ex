@@ -1,0 +1,17 @@
+﻿@using CodingEventsDemo.ViewModel;
+
+@model AddEventCategoryViewModel
+
+<h1>Add Category</h1>
+
+<form method="post" asp-controller="EventCategory" asp-action="ProcessCreateEventCategoryForm">
+
+    <div>
+        <label for="Name">Cateogry Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+
+    </div>
+
+    <input type="submit" value="Add Event" />
+</form>
